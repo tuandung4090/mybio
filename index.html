@@ -3,136 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Bio Link</title>
+    <title>tuandung4090 - Bio Link</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="glass-card profile-card">
-            <div class="profile-header">
-                <img src="https://i.pravatar.cc/150" alt="Avatar" class="avatar">
-                <div class="profile-info">
-                    <h2>hnyb00</h2>
-                    <p>just a normal user working at HyperFast Studio.</p>
+    <div id="intro-screen">
+        <div class="terminal">
+            <p id="typing-text">LOADING ASSETS... 100%<br>SYSTEM READY<span class="cursor">_</span></p>
+            <button id="enter-btn">CLICK TO ENTER</button>
+        </div>
+    </div>
+
+    <div class="container" id="main-content">
+        
+        <div class="glass-card profile-card slide-up">
+            <div class="profile-layout">
+                <div class="avatar-section">
+                    <div class="avatar-wrapper">
+                        <img src="dog.jpg" alt="Avatar" class="avatar-main" id="my-avatar">
+                        <div class="badge-exclamation">!</div>
+                        <div class="anger-symbol">💢</div>
+                    </div>
                 </div>
-            </div>
-            <div class="social-links">
-                <a href="#" class="icon-btn">FB</a>
-                <a href="#" class="icon-btn">Discord</a>
-                <a href="#" class="icon-btn">IG</a>
-                <a href="#" class="icon-btn donate-btn">💖 Donate</a>
+                
+                <div class="info-section">
+                    <h2 id="glitch-name" data-value="tuandung4090">tuandung4090</h2>
+                    <p class="desc">cứ thế thôi.<br><b>hihi</b></p>
+                    
+                    <div class="social-actions">
+                        <div class="social-icons">
+                            <a href="https://www.facebook.com/n4.tdung?locale=vi_VN" class="sq-btn" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="https://discord.gg/CsUShCGvsX" class="sq-btn" target="_blank"><i class="fa-brands fa-discord"></i></a>
+                            <a href="https://www.instagram.com/n4_tdung/" class="sq-btn" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="mailto:tuandung4090@gmail.com" class="sq-btn"><i class="fa-solid fa-envelope"></i></a>
+                            <a href="#" class="sq-btn"><i class="fa-solid fa-mug-hot"></i></a>
+                            <a href="#" class="sq-btn"><i class="fa-solid fa-bolt"></i></a>
+                        </div>
+                        <a href="#" class="donate-btn">
+                            <img src="https://i.imgur.com/3q3Xq3p.png" alt="Rem" class="rem-sticker"> 💖 Donate
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="glass-card discord-card">
-            <div class="discord-profile">
-                <div class="discord-avatar-wrapper">
-                    <img id="discord-avatar" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Discord Avatar">
-                    <div id="discord-status" class="status-dot offline"></div>
+        <div class="discord-row slide-up" style="animation-delay: 0.1s;">
+            <div class="glass-card mini-card discord-user">
+                <div class="mini-header">
+                    <div class="mini-avatar-box">
+                        <img src="dog2.jpg" alt="User">
+                        <div class="status-dot dnd"></div>
+                    </div>
+                    <div class="mini-info">
+                        <h4>! tuandung4090 <span class="cf-badge"> D10</span></h4>
+                        <span class="username">@tuandung4090</span>
+                    </div>
                 </div>
-                <div class="discord-info">
-                    <h3 id="discord-username">Đang tải...</h3>
-                    <p id="discord-custom-status">Đang kết nối Lanyard...</p>
+                <p class="custom-status">hihi</p>
+                <button class="action-btn">View Profile</button>
+            </div>
+
+            <div class="glass-card mini-card discord-server">
+                <div class="mini-header">
+                    <img src="d10.jpg" alt="Server" class="server-icon">
+                    <div class="mini-info">
+                        <h4> D10 FAMILY</h4>
+                        <div class="server-stats">
+                            <span class="stat-dot green"></span> 87 Online
+                            <span class="stat-dot grey"></span> 329 Members
+                        </div>
+                    </div>
                 </div>
+                <a href="https://discord.gg/CsUShCGvsX" target="_blank" class="action-btn" style="text-decoration: none; text-align: center; display: block; box-sizing: border-box;">Join</a>
             </div>
         </div>
 
-        <div class="glass-card music-card">
-            <div class="music-info">
-                <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=150&auto=format&fit=crop" alt="Cover" class="cover-art">
-                <div class="song-details">
-                    <h3>Chạy khỏi thế giới này</h3>
-                    <p>Da LAB, Phương Ly</p>
+        <div class="glass-card music-card slide-up" style="animation-delay: 0.2s;">
+            <div class="music-layout">
+                <img id="track-cover" src="obito.jpg" class="cover-art">
+                <div class="music-details">
+                    <h3 id="track-title">Đánh Đổi - Obito, Shiki</h3>
+                    <div class="time-info">
+                        <span id="current-time">0:00</span>
+                        <div class="progress-bar-mini" id="progress-container">
+                            <div class="progress-mini" id="progress"></div>
+                        </div>
+                        <span id="total-time">...</span>
+                    </div>
+                </div>
+                <div class="controls-right">
+                    <button class="control-btn" id="prev-btn">⏮</button>
+                    <button class="control-btn play-btn" id="play-btn">▶</button>
+                    <button class="control-btn" id="next-btn">⏭</button>
                 </div>
             </div>
             
-            <audio id="my-audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
-
-            <div class="progress-bar" id="progress-container">
-                <div class="progress" id="progress"></div>
-            </div>
-            
-            <div class="controls">
-                <button class="control-btn">⏮</button>
-                <button class="control-btn play-btn" id="play-btn">▶</button>
-                <button class="control-btn">⏭</button>
-            </div>
+            <audio id="my-audio" src="danhdoi.mp3"></audio>
+            <p class="lyrics-text" id="lyrics-text">Đang tải lời bài hát...</p>
         </div>
     </div>
 
     <script>
-        /* =========================================
-           1. API KÉO TRẠNG THÁI DISCORD LANYARD
-           ========================================= */
-        // NHỚ THAY SỐ NÀY BẰNG ID DISCORD THẬT CỦA CẬU NHÉ
-        const DISCORD_ID = '1289877435172782103'; 
+        // 1. Màn hình chờ
+        const introScreen = document.getElementById('intro-screen');
+        const mainContent = document.getElementById('main-content');
+        const enterBtn = document.getElementById('enter-btn');
+        
+        enterBtn.addEventListener('click', () => {
+            introScreen.style.opacity = '0';
+            setTimeout(() => {
+                introScreen.style.display = 'none';
+                mainContent.style.display = 'flex';
+                playTrack(); // Tự động phát nhạc khi bấm Enter
+            }, 500);
+        });
 
-        fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`)
-            .then(response => response.json())
-            .then(data => {
-                if(data.success) {
-                    const user = data.data.discord_user;
-                    const status = data.data.discord_status;
-                    
-                    document.getElementById('discord-avatar').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
-                    document.getElementById('discord-username').innerText = user.global_name || user.username;
-                    document.getElementById('discord-status').className = `status-dot ${status}`;
-                    
-                    if(data.data.activities.length > 0) {
-                        document.getElementById('discord-custom-status').innerText = data.data.activities[0].state || data.data.activities[0].name;
-                    } else {
-                        document.getElementById('discord-custom-status').innerText = "Đang lướt web...";
-                    }
-                } else {
-                    document.getElementById('discord-custom-status').innerText = "Vui lòng tham gia server Lanyard!";
-                }
-            })
-            .catch(err => console.log("Lỗi API Discord:", err));
+        // 2. Hiệu ứng giật chữ (Glitch Text)
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*";
+        const glitchElement = document.getElementById('glitch-name');
+        
+        function glitchText() {
+            let iterations = 0;
+            const originalText = glitchElement.dataset.value;
+            const interval = setInterval(() => {
+                glitchElement.innerText = originalText.split("")
+                    .map((letter, index) => {
+                        if(index < iterations) return originalText[index];
+                        return letters[Math.floor(Math.random() * letters.length)];
+                    }).join("");
+                if(iterations >= originalText.length) clearInterval(interval);
+                iterations += 1 / 3;
+            }, 30);
+        }
+        setInterval(glitchText, 3000);
 
-        /* =========================================
-           2. LOGIC PHÁT NHẠC (MUSIC PLAYER)
-           ========================================= */
+        // 3. Xử lý Phát nhạc & Lyrics
         const audio = document.getElementById('my-audio');
         const playBtn = document.getElementById('play-btn');
         const progress = document.getElementById('progress');
+        const currentTimeEl = document.getElementById('current-time');
+        const totalTimeEl = document.getElementById('total-time');
+        const lyricsEl = document.getElementById('lyrics-text'); 
         const progressContainer = document.getElementById('progress-container');
         
         let isPlaying = false;
+        let currentLyricIndex = -1;
 
-        // Bắt sự kiện bấm nút Play/Pause
+        // KHO LỜI BÀI HÁT
+        // KHO LỜI BÀI HÁT ĐÃ CANH CHUẨN THỜI GIAN THEO FILE AUDIO
+        const lyricsData = [
+            { time: 0, text: "If I had ten thousand tongues I couldn't tell all that the Lord has done for me" },
+            { time: 8, text: "So I'll keep on singing, praise" },
+            { time: 13, text: "Yeah..." },
+            { time: 15, text: "It's hard to say but I gotta tell the truth" },
+            { time: 20, text: "To-, ah" },
+            { time: 22, text: "Tao đánh đổi màn đêm yên giấc viết những bài nhạc hay nhất cuộc đời (ah)" },
+            { time: 25, text: "Di sản là nguồn cảm hứng, fan theo răm rắp nhạc tao thuộc lời (ah)" },
+            { time: 28, text: "Trên bàn tiệc của tiên và quỷ, tao là thằng duy nhất được mời (yeah, whoa)" },
+            { time: 31, text: "Mọi thứ đổ dồn hết vào tao như kiểu tao là một ván cược hời (sashh)" },
+            { time: 34, text: "Tao là đứa con của mặt trăng, mang năng lượng mặt trời (skrr)" },
+            { time: 36, text: "Cuộc đời xoay tao như trực thăng, vẫn vượt lên như thể gặp thời (sheesh)" },
+            { time: 39, text: "Tao không vứt đi bản chất tao như mấy thằng khác để ví được lời (nah)" },
+            { time: 42, text: "Nếu mày cũng mặt nặng, mày nhẹ vì không đồng ý thì thôi được rồi, ah" },
+            { time: 45, text: "Shoutout cho anh Sea, lời chúc phúc bay trên bầu trời" },
+            { time: 48, text: "Em mong anh hãy nói với mẹ, \"Cuộc sống con giờ đã đỡ cực rồi\"" },
+            { time: 51, text: "Hai anh em đã đổ nước mắt, nhiều câu chuyện về những người tồi" },
+            { time: 54, text: "Sự đánh đổi này vẫn luôn đẹp như thể ngày xưa chơi cất nhà chồi" },
+            { time: 57, text: "Fuck it, whoa, đêm đông lạnh giữa trời Hà Nội" },
+            { time: 59, text: "Flow tao chảy cùng những niềm đau như thể đang châm thêm mực vào ngòi (yeah)" },
+            { time: 62, text: "Chuỗi hành trình cùng nhiều câu hỏi, ai là cá còn ai là mồi?" },
+            { time: 65, text: "Mọi thứ đều luôn có mặt tối nhưng liệu mày có sẵn sàng đánh đổi?" },
+            { time: 68, text: "Ngắm nhìn cả thế giới từ xa, damn it's cold (yeah, it's cold)" },
+            { time: 71, text: "Nếu mày hỏi tao ác hay thiện, man I don't know (I don't know)" },
+            { time: 74, text: "Chắc đây vốn đã là cái giá cho bao lần đau" },
+            { time: 77, text: "Sự đánh đổi này cho tao thấy mọi thứ đã không như ngày đầu (yeah, yeah)" },
+            { time: 80, text: "Ngắm nhìn cả thế giới từ xa, damn it's cold (damn it's cold)" },
+            { time: 83, text: "Nếu mày hỏi tao ác hay thiện, man I don't know (I don't know)" },
+            { time: 86, text: "Chắc đây vốn đã là cái giá cho bao lần đau" },
+            { time: 88, text: "Sự đánh đổi này cho tao thấy mọi thứ đã không như ngày đầu" },
+            { time: 92, text: "It's a fair trade, telling all the truth" },
+            { time: 94, text: "It's a fair trade, pussy in the way" },
+            { time: 97, text: "It's a fair trade, fuck you if you even fake it" },
+            { time: 100, text: "It's a fuckin' fair trade, hoh" },
+            { time: 104, text: "I wanna know... That I wanna know how I feel" },
+            { time: 110, text: "Wanna know how I feel... How I feel, in my heart" },
+            { time: 114, text: "My heart, my heart" },
+            { time: 122, text: "Ah, ah, ah (let's get it) / Ah, ah, ah (hoe)" },
+            { time: 154, text: "To-, youngto-, youngto-, youngto-, youngto-, youngto- (krrrrr)" },
+            { time: 158, text: "2020 và tao nổi như hiện tượng, nhưng không chìm vào trong đấy để rồi chết như thằng ngu" },
+            { time: 161, text: "Ba năm đánh đổi để tu thân trong hoạ đời rồi biết đâu là thật giả, tâm tao nhàn như tiều phu (yeah)" },
+            { time: 164, text: "Đảo mắt quan sát như diều hâu đang đi lượn, im lặng và cười nhếch với drama và ruồi bu" },
+            { time: 166, text: "2023 lời tao bắn như cái máy mà còn đéo trượt phát nào, sự đánh đổi đó thằng cu" },
+            { time: 169, text: "Trò đời quăng tao vào địa ngục (bitch), cho tao biết mặt trái của whole game (whoo)" },
+            { time: 172, text: "Cho tao bài hit, cho fame, xong nó lấy đi tất cả sau bao đêm" },
+            { time: 175, text: "Tao vẫn vươn từ dưới đáy đi lên (cha-), bật và đòi lại bằng được, no shame" },
+            { time: 178, text: "Chiêm nghiệm và mài dũa thâu đêm, giờ tinh khiết và óng ánh như blue gem" },
+            { time: 181, text: "Không tìm thấy tao, tao bận đi tu luyện, câu chuyện của tao có đủ để hay hơn tụi mày" },
+            { time: 184, text: "Tu xong dù thành tiên hay là thành quỷ, vẫn ẩn khỏi radar, thân vẫn đóng lớp bụi dày" },
+            { time: 186, text: "Rất nhiều thằng trẻ là trường hợp giống như tao nhưng bị nghề này nó dập xong tâm lý ở dưới đáy" },
+            { time: 189, text: "Tao thoát được tệ nạn, thoát được cảnh vung dao, tao đánh đổi tất cả (yah) để chân chạy đến được đây hoes" },
+            { time: 192, text: "Trên cao. Tao biết là tao, vẫn đang chính là tao, khi mà chơi chán yeah peace, I'm out (anh ei)" },
+            { time: 195, text: "Đôi khi rất là cô đơn, tao lấy hết sự cô đơn, tao lấp vào trong bank account (ching-ching)" },
+            { time: 198, text: "Như là Pacquiao, Manny Pacquiao shadow box trên nền vinahouse (vina)" },
+            { time: 201, text: "Vẫn chưa thấy thằng nào nhanh hơn tao" },
+            { time: 203, text: "Thác đổ, thác đổ, flow tao dồn xuống như là K50" },
+            { time: 205, text: "Ở dưới toàn núi đồi, núi đồi" },
+            { time: 207, text: "Bỏ mẹ rồi, úi dồi, úi dồi (youngtobieedasick)" },
+            { time: 209, text: "(MCK, MCK, MCK) (yah)" },
+            { time: 211, text: "Cẩn thận, không bị cuốn vào, cuốn vào" },
+            { time: 213, text: "Anh là mỏ, uhm, ối người muốn đào" },
+            { time: 215, text: "Anh về rồi, cúi người xuống nào" },
+            { time: 217, text: "I don't know what the fuck they be talkin' about girl" },
+            { time: 219, text: "She crazy (woah), he crazy (woah-woah-woah-woah-woah)" },
+            { time: 221, text: "Phong Ly, Phong Ly, Phong Ly, Phong Ly (Ngô Phảng Phất)" },
+            { time: 224, text: "Youngtobieedasick. MCK, MCK, MCK, MCK" },
+            { time: 228, text: "..." }
+        ];
+
+        function playTrack() {
+            audio.play();
+            isPlaying = true;
+            playBtn.innerHTML = '⏸';
+        }
+
+        function pauseTrack() {
+            audio.pause();
+            isPlaying = false;
+            playBtn.innerHTML = '▶';
+        }
+
         playBtn.addEventListener('click', () => {
-            if (isPlaying) {
-                audio.pause();
-                playBtn.innerText = '▶';
-            } else {
-                audio.play();
-                playBtn.innerText = '⏸'; // Đổi icon thành nút Pause
-            }
-            isPlaying = !isPlaying;
+            isPlaying ? pauseTrack() : playTrack();
         });
 
-        // Cập nhật thanh tiến trình khi nhạc đang chạy
+        // Lấy thời lượng tổng của bài hát
+        audio.addEventListener('loadedmetadata', () => {
+            let min = Math.floor(audio.duration / 60);
+            let sec = Math.floor(audio.duration % 60);
+            totalTimeEl.innerText = `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        });
+
+        // HỆ THỐNG ĐỒNG BỘ LYRICS & THANH CHẠY
+       // ĐỒNG BỘ LYRICS & THANH CHẠY (ĐÃ THÊM TÍNH NĂNG CHỈNH ĐỘ TRỄ)
         audio.addEventListener('timeupdate', () => {
-            const percent = (audio.currentTime / audio.duration) * 100;
-            // Tránh lỗi NaN khi audio chưa load xong duration
-            if (!isNaN(percent)) {
-                progress.style.width = `${percent}%`;
+            let actualTime = audio.currentTime;
+            
+            // 1. Cập nhật thanh thời gian (Vẫn chạy đúng theo nhạc)
+            const percent = (actualTime / audio.duration) * 100;
+            if(!isNaN(percent)) progress.style.width = `${percent}%`;
+            
+            let min = Math.floor(actualTime / 60);
+            let sec = Math.floor(actualTime % 60);
+            currentTimeEl.innerText = `${min}:${sec < 10 ? '0' : ''}${sec}`;
+
+            // --- BÍ QUYẾT Ở ĐÂY ---
+            // Nếu chữ ra QUÁ NHANH, cậu tăng số này lên (ví dụ: 1.5, 2, 3...)
+            // Nếu chữ ra QUÁ CHẬM, cậu đổi thành số âm (ví dụ: -1, -2...)
+            let delaySeconds = 0; // Đang lùi lời bài hát lại 1.5 giây
+            
+            // Thời gian ảo dùng để tính toán chữ (đã bị lùi lại)
+            let lyricsTime = actualTime - delaySeconds; 
+
+            // 2. Logic tìm câu hát
+            let nextIndex = lyricsData.findIndex(lyric => lyric.time > lyricsTime);
+            let activeIndex = nextIndex === -1 ? lyricsData.length - 1 : nextIndex - 1;
+
+            if (activeIndex !== currentLyricIndex && activeIndex >= 0) {
+                currentLyricIndex = activeIndex;
+                
+                lyricsEl.classList.remove('active');
+                setTimeout(() => {
+                    lyricsEl.innerText = lyricsData[currentLyricIndex].text;
+                    lyricsEl.classList.add('active');
+                }, 300);
             }
         });
-
-        // Cho phép tua nhạc khi click vào thanh progress bar
+        // BẮT SỰ KIỆN CLICK ĐỂ TUA NHẠC
         progressContainer.addEventListener('click', (e) => {
             const width = progressContainer.clientWidth;
             const clickX = e.offsetX;
             const duration = audio.duration;
+            
+            // Cập nhật thời gian bài hát
             audio.currentTime = (clickX / width) * duration;
-        });
-
-        // Khi hết bài thì tự quay lại nút Play
-        audio.addEventListener('ended', () => {
-            playBtn.innerText = '▶';
-            isPlaying = false;
-            progress.style.width = '0%';
+            
+            // Nếu nhạc đang dừng mà bấm tua thì cho phát luôn
+            if (!isPlaying) {
+                playTrack();
+            }
         });
     </script>
 </body>
