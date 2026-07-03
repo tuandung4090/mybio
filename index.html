@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bio Link</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="glass-card profile-card">
+            <div class="profile-header">
+                <img src="https://i.pravatar.cc/150" alt="Avatar" class="avatar">
+                <div class="profile-info">
+                    <h2>hnyb00</h2>
+                    <p>just a normal user working at HyperFast Studio.</p>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#" class="icon-btn">FB</a>
+                <a href="#" class="icon-btn">Discord</a>
+                <a href="#" class="icon-btn">IG</a>
+                <a href="#" class="icon-btn donate-btn">💖 Donate</a>
+            </div>
+        </div>
+
+        <div class="glass-card discord-card">
+            <div class="discord-profile">
+                <div class="discord-avatar-wrapper">
+                    <img id="discord-avatar" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Discord Avatar">
+                    <div id="discord-status" class="status-dot offline"></div>
+                </div>
+                <div class="discord-info">
+                    <h3 id="discord-username">Đang tải...</h3>
+                    <p id="discord-custom-status">Đang kết nối Lanyard...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card music-card">
+            <div class="music-info">
+                <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=150&auto=format&fit=crop" alt="Cover" class="cover-art">
+                <div class="song-details">
+                    <h3>Chạy khỏi thế giới này</h3>
+                    <p>Da LAB, Phương Ly</p>
+                </div>
+            </div>
+            
+            <audio id="my-audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+            <div class="progress-bar" id="progress-container">
+                <div class="progress" id="progress"></div>
+            </div>
+            
+            <div class="controls">
+                <button class="control-btn">⏮</button>
+                <button class="control-btn play-btn" id="play-btn">▶</button>
+                <button class="control-btn">⏭</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* =========================================
+           1. API KÉO TRẠNG THÁI DISCORD LANYARD
+           ========================================= */
+        // NHỚ THAY SỐ NÀY BẰNG ID DISCORD THẬT CỦA CẬU NHÉ
+        const DISCORD_ID = '1289877435172782103'; 
+
+        fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`)
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    const user = data.data.discord_user;
+                    const status = data.data.discord_status;
+                    
+                    document.getElementById('discord-avatar').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+                    document.getElementById('discord-username').innerText = user.global_name || user.username;
+                    document.getElementById('discord-status').className = `status-dot ${status}`;
+                    
+                    if(data.data.activities.length > 0) {
+                        document.getElementById('discord-custom-status').innerText = data.data.activities[0].state || data.data.activities[0].name;
+                    } else {
+                        document.getElementById('discord-custom-status').innerText = "Đang lướt web...";
+                    }
+                } else {
+                    document.getElementById('discord-custom-status').innerText = "Vui lòng tham gia server Lanyard!";
+                }
+            })
+            .catch(err => console.log("Lỗi API Discord:", err));
+
+        /* =========================================
+           2. LOGIC PHÁT NHẠC (MUSIC PLAYER)
+           ========================================= */
+        const audio = document.getElementById('my-audio');
+        const playBtn = document.getElementById('play-btn');
+        const progress = document.getElementById('progress');
+        const progressContainer = document.getElementById('progress-container');
+        
+        let isPlaying = false;
+
+        // Bắt sự kiện bấm nút Play/Pause
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playBtn.innerText = '▶';
+            } else {
+                audio.play();
+                playBtn.innerText = '⏸'; // Đổi icon thành nút Pause
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Cập nhật thanh tiến trình khi nhạc đang chạy
+        audio.addEventListener('timeupdate', () => {
+            const percent = (audio.currentTime / audio.duration) * 100;
+            // Tránh lỗi NaN khi audio chưa load xong duration
+            if (!isNaN(percent)) {
+                progress.style.width = `${percent}%`;
+            }
+        });
+
+        // Cho phép tua nhạc khi click vào thanh progress bar
+        progressContainer.addEventListener('click', (e) => {
+            const width = progressContainer.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            audio.currentTime = (clickX / width) * duration;
+        });
+
+        // Khi hết bài thì tự quay lại nút Play
+        audio.addEventListener('ended', () => {
+            playBtn.innerText = '▶';
+            isPlaying = false;
+            progress.style.width = '0%';
+        });
+    </script>
+</body>
+</html>

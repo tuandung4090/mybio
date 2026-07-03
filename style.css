@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+body {
+    background-image: url('https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=2560&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* --- TRANG TRÍ CARD PROFILE --- */
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.profile-info h2 { font-size: 1.5rem; margin-bottom: 5px; }
+.profile-info p { font-size: 0.9rem; color: rgba(255, 255, 255, 0.8); }
+
+.social-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.icon-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.icon-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.donate-btn {
+    background: rgba(255, 105, 180, 0.4);
+    border-color: rgba(255, 105, 180, 0.6);
+    font-weight: bold;
+}
+
+.donate-btn:hover { background: rgba(255, 105, 180, 0.6); }
+
+/* --- TRANG TRÍ CARD DISCORD --- */
+.discord-profile { display: flex; align-items: center; gap: 15px; }
+.discord-avatar-wrapper { position: relative; }
+
+#discord-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.status-dot {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 3px solid #2b2b2b;
+}
+
+.online { background-color: #43b581; }
+.idle { background-color: #faa61a; }
+.dnd { background-color: #f04747; }
+.offline { background-color: #747f8d; }
+
+.discord-info h3 { font-size: 1.2rem; margin-bottom: 4px; }
+.discord-info p { font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); }
+
+/* --- TRANG TRÍ CARD MUSIC --- */
+.music-info { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+
+.cover-art {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.song-details h3 { font-size: 1.1rem; margin-bottom: 4px; }
+.song-details p { font-size: 0.85rem; color: rgba(255, 255, 255, 0.7); }
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    cursor: pointer; /* Đổi con trỏ thành bàn tay để biết có thể click tua nhạc */
+}
+
+.progress { 
+    width: 0%; /* Khởi đầu bằng 0 thay vì 45% như trước */
+    height: 100%; 
+    background: #fff; 
+    border-radius: 10px; 
+    transition: width 0.1s linear; /* Làm mượt thanh chạy */
+}
+
+.controls { display: flex; justify-content: center; align-items: center; gap: 25px; }
+
+.control-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.control-btn:hover { transform: scale(1.2); }
+.play-btn { font-size: 2.2rem; }
