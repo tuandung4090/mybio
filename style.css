@@ -1,166 +1,154 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0; padding: 0; box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
 body {
-    background-image: url('https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=2560&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    min-height: 100vh;
+    background-color: #1a1a2e;
+    background-image: url('op.jpg'); /* Nhớ để ảnh anime vào thư mục nha */
+    background-size: cover; background-position: center; background-attachment: fixed;
+    min-height: 100vh; display: flex; justify-content: center; align-items: center;
+    color: white; overflow: hidden;
+}
+
+/* Intro Screen */
+#intro-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #0f111a; display: flex; justify-content: center; align-items: center;
+    z-index: 9999; transition: opacity 0.5s ease;
+}
+.terminal { background: rgba(0,0,0,0.6); padding: 30px; border-radius: 10px; border: 1px solid #333; text-align: center; }
+#typing-text { color: #4af626; font-family: monospace; font-size: 1.2rem; margin-bottom: 20px; }
+.cursor { animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+#enter-btn { background: white; color: black; padding: 10px 20px; font-weight: bold; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+
+/* Main Content */
+#main-content { display: none; }
+.container { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 20px; /* Nới rộng khoảng cách giữa các ô một chút */
+    width: 100%; 
+    max-width: 800px; /* SỬA Ở ĐÂY: Tăng lên 800px (cũ là 650px) để các ô to ra */
+    padding: 20px; 
+    z-index: 10; 
+}
+
+/* Cậu cũng có thể cho phần đệm bên trong ô dày thêm một chút cho thoáng */
+.glass-card {
+    background: rgba(40, 40, 40, 0.4); 
+    backdrop-filter: blur(16px); 
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.1); 
+    border-radius: 20px; 
+    padding: 28px; /* Tăng padding từ 20px lên 28px để ô nhìn mập mạp hơn */
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.slide-up { opacity: 0; transform: translateY(30px); animation: slideUp 0.6s forwards; }
+@keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+
+/* --- CARD 1: PROFILE --- */
+.profile-layout { display: flex; gap: 20px; align-items: center; }
+.avatar-section { position: relative; }
+.avatar-wrapper { position: relative; }
+.avatar-main { 
+    width: 90px; height: 90px; border-radius: 50%; object-fit: cover;
+    border: 3px solid #ff3333; /* Viền đỏ rực */
+}
+.badge-exclamation {
+    position: absolute; bottom: 0; left: 0; background: white; color: black;
+    width: 24px; height: 24px; border-radius: 50%; display: flex;
+    justify-content: center; align-items: center; font-weight: bold; font-size: 14px;
+}
+.anger-symbol { position: absolute; top: -5px; right: -5px; font-size: 20px; }
+
+.info-section { flex: 1; }
+.info-section h2 { font-size: 1.6rem; margin-bottom: 5px; }
+.desc { font-size: 0.85rem; color: #ccc; margin-bottom: 15px; line-height: 1.4; }
+.desc b { color: #fff; }
+
+.social-actions { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.social-icons { display: flex; gap: 8px; }
+.sq-btn {
+    width: 35px; height: 35px; background: rgba(255,255,255,0.15); color: white;
+    display: flex; justify-content: center; align-items: center;
+    border-radius: 8px; text-decoration: none; transition: 0.2s;
+}
+.sq-btn:hover { background: rgba(255,255,255,0.3); }
+
+.donate-btn {
+    position: relative; background: #ff6b9e; color: white; padding: 8px 16px;
+    border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 0.9rem;
+}
+.rem-sticker { position: absolute; top: -35px; right: -10px; width: 45px; pointer-events: none; }
+
+/* --- CARD 2: DISCORD ROW --- */
+.discord-row { display: flex; gap: 15px; }
+.mini-card { flex: 1; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; }
+.mini-header { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+.mini-avatar-box { position: relative; }
+.mini-avatar-box img, .server-icon { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
+.status-dot { position: absolute; bottom: 0; right: 0; width: 14px; height: 14px; border-radius: 50%; border: 2px solid #2b2b2b; }
+.dnd { background: #f04747; }
+
+.mini-info h4 { font-size: 0.95rem; display: flex; align-items: center; gap: 5px; }
+.cf-badge { background: #333; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; color: orange; }
+.username { font-size: 0.75rem; color: #aaa; }
+.custom-status { font-size: 0.8rem; color: #ccc; margin-bottom: 15px; }
+
+.server-stats { font-size: 0.75rem; color: #aaa; display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+.stat-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.stat-dot.green { background: #43b581; } .stat-dot.grey { background: #747f8d; }
+
+.action-btn { background: #3ba55c; color: white; border: none; padding: 8px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; transition: 0.2s; }
+.action-btn:hover { background: #2d8046; }
+
+/* --- CARD 3: MUSIC --- */
+.music-layout { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+.music-details { flex: 1; }
+.music-details h3 { font-size: 1rem; margin-bottom: 8px; }
+
+.time-info { display: flex; align-items: center; gap: 10px; font-size: 0.75rem; color: #ccc; }
+.progress-bar-mini { flex: 1; height: 4px; background: rgba(255,255,255,0.2); border-radius: 5px; position: relative; }
+.progress-mini { width: 10%; height: 100%; background: white; border-radius: 5px; position: relative; }
+.progress-mini::after {
+    content: ''; position: absolute; right: -5px; top: -3px;
+    width: 10px; height: 10px; background: white; border-radius: 50%;
+}
+
+.controls-right { display: flex; gap: 15px; align-items: center; }
+.control-btn { background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer; }
+.play-btn { font-size: 1.8rem; }
+
+.cover-art { 
+    width: 85px;  /* Khóa cứng chiều rộng (Cậu có thể tăng giảm số này tùy ý) */
+    height: 85px; /* Khóa cứng chiều cao */
+    border-radius: 12px; 
+    object-fit: cover; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
+    flex-shrink: 0; /* Ngăn không cho ảnh bị méo khi giao diện thu nhỏ */
+}
+
+/* Chỉnh lại phần Lyrics để có hiệu ứng chuyển cảnh */
+.lyrics-text { 
+    text-align: center; 
+    font-size: 0.95rem; 
+    color: #fff; 
+    font-weight: bold;
+    min-height: 45px; /* Giữ khung không bị giật khi đổi dòng */
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0; 
+    transform: translateY(10px);
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
+/* Class được kích hoạt bằng JavaScript khi hiện chữ mới */
+.lyrics-text.active {
+    opacity: 1;
+    transform: translateY(0);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Sáng nhẹ chữ */
 }
-
-.glass-card {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 24px;
-    padding: 24px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-}
-
-/* --- TRANG TRÍ CARD PROFILE --- */
-.profile-card {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.profile-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.avatar {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-}
-
-.profile-info h2 { font-size: 1.5rem; margin-bottom: 5px; }
-.profile-info p { font-size: 0.9rem; color: rgba(255, 255, 255, 0.8); }
-
-.social-links {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.icon-btn {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-}
-
-.icon-btn:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
-}
-
-.donate-btn {
-    background: rgba(255, 105, 180, 0.4);
-    border-color: rgba(255, 105, 180, 0.6);
-    font-weight: bold;
-}
-
-.donate-btn:hover { background: rgba(255, 105, 180, 0.6); }
-
-/* --- TRANG TRÍ CARD DISCORD --- */
-.discord-profile { display: flex; align-items: center; gap: 15px; }
-.discord-avatar-wrapper { position: relative; }
-
-#discord-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.status-dot {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: 3px solid #2b2b2b;
-}
-
-.online { background-color: #43b581; }
-.idle { background-color: #faa61a; }
-.dnd { background-color: #f04747; }
-.offline { background-color: #747f8d; }
-
-.discord-info h3 { font-size: 1.2rem; margin-bottom: 4px; }
-.discord-info p { font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); }
-
-/* --- TRANG TRÍ CARD MUSIC --- */
-.music-info { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
-
-.cover-art {
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    object-fit: cover;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-
-.song-details h3 { font-size: 1.1rem; margin-bottom: 4px; }
-.song-details p { font-size: 0.85rem; color: rgba(255, 255, 255, 0.7); }
-
-.progress-bar {
-    width: 100%;
-    height: 6px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    margin-bottom: 20px;
-    overflow: hidden;
-    cursor: pointer; /* Đổi con trỏ thành bàn tay để biết có thể click tua nhạc */
-}
-
-.progress { 
-    width: 0%; /* Khởi đầu bằng 0 thay vì 45% như trước */
-    height: 100%; 
-    background: #fff; 
-    border-radius: 10px; 
-    transition: width 0.1s linear; /* Làm mượt thanh chạy */
-}
-
-.controls { display: flex; justify-content: center; align-items: center; gap: 25px; }
-
-.control-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.control-btn:hover { transform: scale(1.2); }
-.play-btn { font-size: 2.2rem; }
