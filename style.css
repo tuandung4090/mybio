@@ -1,3 +1,4 @@
+/* BASE STYLES */
 * {
     margin: 0; padding: 0; box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, sans-serif;
@@ -5,45 +6,195 @@
 
 body {
     background-color: #1a1a2e;
-    background-image: url('op.jpg'); /* Nhớ để ảnh anime vào thư mục nha */
+    background-image: url('lt.jpg'); /* Nhớ để ảnh anime vào thư mục nha */
     background-size: cover; background-position: center; background-attachment: fixed;
     min-height: 100vh; display: flex; justify-content: center; align-items: center;
     color: white; overflow: hidden;
 }
 
-/* Intro Screen */
+/* Ẩn con trỏ chuột mặc định để dùng chuột custom */
+body, a, button, .progress-bar-mini, .action-btn, .sq-btn, .donate-btn {
+    cursor: none !important;
+}
+
+/* =========================================
+   HIỆU ỨNG CON TRỎ CHUỘT CHẤM ĐEN (ĐÃ LÀM NHỎ & ĐEN HƠN)
+   ========================================= */
+#custom-cursor {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 14px; /* Thu nhỏ lại */
+    height: 14px; /* Thu nhỏ lại */
+    background-color: #000000; /* Màu đen tuyệt đối */
+    border: 1px solid rgba(255, 255, 255, 0.25); /* Viền mỏng lại để màu đen nổi bật hơn */
+    border-radius: 50%;
+    pointer-events: none; /* Quan trọng để click xuyên qua được */
+    z-index: 999999; 
+    transform: translate(-50%, -50%); 
+    transition: transform 0.1s ease; 
+}
+
+/* =========================================
+   MÀN HÌNH CHỜ (INTRO SCREEN) & TERMINAL
+   ========================================= */
 #intro-screen {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: #0f111a; display: flex; justify-content: center; align-items: center;
-    z-index: 9999; transition: opacity 0.5s ease;
+    background: transparent; 
+    display: flex; justify-content: center; align-items: center;
+    z-index: 9999;
 }
-.terminal { background: rgba(0,0,0,0.6); padding: 30px; border-radius: 10px; border: 1px solid #333; text-align: center; }
-#typing-text { color: #4af626; font-family: monospace; font-size: 1.2rem; margin-bottom: 20px; }
-.cursor { animation: blink 1s infinite; }
-@keyframes blink { 50% { opacity: 0; } }
-#enter-btn { background: white; color: black; padding: 10px 20px; font-weight: bold; border-radius: 5px; cursor: pointer; transition: 0.3s; }
 
-/* Main Content */
+#intro-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: #0f111a; 
+    transition: opacity 0.5s ease;
+    z-index: 1; 
+}
+
+.terminal {
+    background: #1a1b26; 
+    width: 360px;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2; 
+    transition: all 0.5s ease;
+    border: 1px solid #333;
+    overflow: hidden;
+}
+
+.mac-header {
+    background: #24283b;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #111;
+    transition: all 0.5s ease;
+}
+
+.mac-title {
+    color: #a9b1d6;
+    font-family: monospace;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.mac-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+.terminal-body {
+    padding: 30px 20px 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#typing-text {
+    font-family: 'Courier New', Courier, monospace; 
+    color: #e0e0e0; 
+    font-size: 16px;
+    line-height: 2;
+    text-align: left;
+    width: 100%;
+    padding-left: 15%; 
+    margin-bottom: 25px;
+}
+
+#system-ready {
+    transition: opacity 0.3s ease;
+}
+
+.cursor { animation: blink 1s step-end infinite; font-weight: bold; }
+@keyframes blink { 50% { opacity: 0; } }
+
+#enter-btn {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 10px 24px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    font-family: monospace;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+#enter-btn:hover {
+    border-color: #fff;
+    box-shadow: 0 0 15px rgba(255,255,255,0.6); 
+}
+
+.terminal.glass-mode {
+    background: rgba(26, 27, 38, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.terminal.glass-mode .mac-header {
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.genie-effect {
+    transform: scale(0.01, 0.05) translateY(2000px); 
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: none;
+}
+
+
+/* =========================================
+   MAIN CONTENT (GIAO DIỆN BIO NẰM NGANG)
+   ========================================= */
 #main-content { display: none; }
 .container { 
     display: flex; 
     flex-direction: column; 
-    gap: 20px; /* Nới rộng khoảng cách giữa các ô một chút */
+    gap: 20px; 
     width: 100%; 
-    max-width: 800px; /* SỬA Ở ĐÂY: Tăng lên 800px (cũ là 650px) để các ô to ra */
+    max-width: 800px; 
     padding: 20px; 
     z-index: 10; 
 }
 
-/* Cậu cũng có thể cho phần đệm bên trong ô dày thêm một chút cho thoáng */
+/* Kính mờ chung cho các khối Bio + HIỆU ỨNG NỔI THẺ */
 .glass-card {
     background: rgba(40, 40, 40, 0.4); 
     backdrop-filter: blur(16px); 
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255,255,255,0.1); 
     border-radius: 20px; 
-    padding: 28px; /* Tăng padding từ 20px lên 28px để ô nhìn mập mạp hơn */
+    padding: 28px; 
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    position: relative; /* Cần thiết để z-index hoạt động */
+    z-index: 10;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Làm mượt chuyển động nổi lên */
+}
+
+/* KHI LIA CHUỘT VÀO THẺ: NỔI LÊN VÀ ĐÈ LÊN THẺ KHÁC */
+.glass-card:hover {
+    transform: translateY(-8px) scale(1.03); 
+    z-index: 100; /* Đẩy thẻ này lên lớp cao nhất */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7); /* Tăng độ đậm của bóng đổ */
+    border: 1px solid rgba(255, 255, 255, 0.3); 
 }
 
 .slide-up { opacity: 0; transform: translateY(30px); animation: slideUp 0.6s forwards; }
@@ -55,7 +206,7 @@ body {
 .avatar-wrapper { position: relative; }
 .avatar-main { 
     width: 90px; height: 90px; border-radius: 50%; object-fit: cover;
-    border: 3px solid #ff3333; /* Viền đỏ rực */
+    border: 3px solid #ff3333; 
 }
 .badge-exclamation {
     position: absolute; bottom: 0; left: 0; background: white; color: black;
@@ -102,7 +253,7 @@ body {
 .stat-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 .stat-dot.green { background: #43b581; } .stat-dot.grey { background: #747f8d; }
 
-.action-btn { background: #3ba55c; color: white; border: none; padding: 8px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; transition: 0.2s; }
+.action-btn { background: #3ba55c; color: white; border: none; padding: 8px; border-radius: 8px; transition: 0.2s; font-weight: bold; width: 100%; }
 .action-btn:hover { background: #2d8046; }
 
 /* --- CARD 3: MUSIC --- */
@@ -119,25 +270,25 @@ body {
 }
 
 .controls-right { display: flex; gap: 15px; align-items: center; }
-.control-btn { background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer; }
+.control-btn { background: none; border: none; color: white; font-size: 1.2rem; }
 .play-btn { font-size: 1.8rem; }
 
 .cover-art { 
-    width: 85px;  /* Khóa cứng chiều rộng (Cậu có thể tăng giảm số này tùy ý) */
-    height: 85px; /* Khóa cứng chiều cao */
+    width: 85px;  
+    height: 85px; 
     border-radius: 12px; 
     object-fit: cover; 
     box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
-    flex-shrink: 0; /* Ngăn không cho ảnh bị méo khi giao diện thu nhỏ */
+    flex-shrink: 0; 
 }
 
-/* Chỉnh lại phần Lyrics để có hiệu ứng chuyển cảnh */
+/* Lời bài hát */
 .lyrics-text { 
     text-align: center; 
     font-size: 0.95rem; 
     color: #fff; 
     font-weight: bold;
-    min-height: 45px; /* Giữ khung không bị giật khi đổi dòng */
+    min-height: 45px; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -146,9 +297,8 @@ body {
     transform: translateY(10px);
 }
 
-/* Class được kích hoạt bằng JavaScript khi hiện chữ mới */
 .lyrics-text.active {
     opacity: 1;
     transform: translateY(0);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Sáng nhẹ chữ */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
