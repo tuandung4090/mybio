@@ -3,20 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tuandung4090 - Bio Link</title>
+    <title>tuandung4090</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <div id="custom-cursor"></div>
+
     <div id="intro-screen">
-        <div class="terminal">
-            <p id="typing-text">LOADING ASSETS... 100%<br>SYSTEM READY<span class="cursor">_</span></p>
-            <button id="enter-btn">CLICK TO ENTER</button>
+        <div id="intro-overlay"></div> 
+        
+        <div class="terminal" id="terminal-window">
+            <div class="mac-header">
+                <span class="mac-title">Status</span>
+                <div class="mac-buttons">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+            </div>
+            
+            <div class="terminal-body">
+                <div id="typing-text">
+                    <div>LOADING ASSETS... <span id="loading-percent">0</span>%</div>
+                    <div id="system-ready" style="opacity: 0;">SYSTEM READY<span class="cursor">_</span></div>
+                </div>
+                <button id="enter-btn" style="opacity: 0; pointer-events: none;">CLICK TO ENTER</button>
+            </div>
         </div>
     </div>
 
     <div class="container" id="main-content">
-        
         <div class="glass-card profile-card slide-up">
             <div class="profile-layout">
                 <div class="avatar-section">
@@ -41,7 +58,7 @@
                             <a href="#" class="sq-btn"><i class="fa-solid fa-bolt"></i></a>
                         </div>
                         <a href="#" class="donate-btn">
-                            <img src="https://i.imgur.com/3q3Xq3p.png" alt="Rem" class="rem-sticker"> 💖 Donate
+                            <img src="https://i.pinimg.com/736x/9a/20/e8/9a20e8cee56afc0449ba5c3cc7adde97.jpg" alt="Rem" class="rem-sticker"> 💖 Donate
                         </a>
                     </div>
                 </div>
@@ -70,8 +87,8 @@
                     <div class="mini-info">
                         <h4> D10 FAMILY</h4>
                         <div class="server-stats">
-                            <span class="stat-dot green"></span> 87 Online
-                            <span class="stat-dot grey"></span> 329 Members
+                            <span class="stat-dot green"></span> 43 Online
+                            <span class="stat-dot grey"></span> 243 Members
                         </div>
                     </div>
                 </div>
@@ -93,9 +110,11 @@
                     </div>
                 </div>
                 <div class="controls-right">
+                    <button class="control-btn" id="vol-down-btn"><i class="fa-solid fa-volume-low"></i></button>
                     <button class="control-btn" id="prev-btn">⏮</button>
                     <button class="control-btn play-btn" id="play-btn">▶</button>
                     <button class="control-btn" id="next-btn">⏭</button>
+                    <button class="control-btn" id="vol-up-btn"><i class="fa-solid fa-volume-high"></i></button>
                 </div>
             </div>
             
@@ -105,21 +124,72 @@
     </div>
 
     <script>
-        // 1. Màn hình chờ
+        // =========================================
+        // 1. HIỆU ỨNG CON TRỎ CHUỘT
+        // =========================================
+        const customCursor = document.getElementById('custom-cursor');
+
+        document.addEventListener('mousemove', (e) => {
+            customCursor.style.left = e.clientX + 'px';
+            customCursor.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mousedown', () => {
+            customCursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
+        });
+        document.addEventListener('mouseup', () => {
+            customCursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // =========================================
+        // 2. MÀN HÌNH INTRO & TERMINAL
+        // =========================================
         const introScreen = document.getElementById('intro-screen');
         const mainContent = document.getElementById('main-content');
         const enterBtn = document.getElementById('enter-btn');
-        
+        const introOverlay = document.getElementById('intro-overlay'); 
+        const terminalWindow = document.getElementById('terminal-window'); 
+        const percentEl = document.getElementById('loading-percent');
+        const systemReadyEl = document.getElementById('system-ready');
+
+        let count = 0;
+        let loader = setInterval(() => {
+            count++;
+            if(percentEl) percentEl.innerText = count;
+            if (count >= 100) {
+                clearInterval(loader);
+                if(systemReadyEl) systemReadyEl.style.opacity = '1';
+                if(enterBtn) {
+                    enterBtn.style.opacity = '1';
+                    enterBtn.style.pointerEvents = 'auto';
+                }
+            }
+        }, 20); 
+
+        enterBtn.addEventListener('mouseenter', () => {
+            if(introOverlay) introOverlay.style.opacity = '0';
+            if(terminalWindow) terminalWindow.classList.add('glass-mode'); 
+        });
+
+        enterBtn.addEventListener('mouseleave', () => {
+            if(introOverlay) introOverlay.style.opacity = '1';
+            if(terminalWindow) terminalWindow.classList.remove('glass-mode'); 
+        });
+
         enterBtn.addEventListener('click', () => {
-            introScreen.style.opacity = '0';
+            introScreen.classList.add('genie-effect'); 
             setTimeout(() => {
                 introScreen.style.display = 'none';
                 mainContent.style.display = 'flex';
-                playTrack(); // Tự động phát nhạc khi bấm Enter
-            }, 500);
+                playTrack(); 
+            }, 600);
         });
 
-        // 2. Hiệu ứng giật chữ (Glitch Text)
+        // =========================================
+        // 3. HIỆU ỨNG GIẬT CHỮ
+        // =========================================
         const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*";
         const glitchElement = document.getElementById('glitch-name');
         
@@ -138,7 +208,9 @@
         }
         setInterval(glitchText, 3000);
 
-        // 3. Xử lý Phát nhạc & Lyrics
+        // =========================================
+        // 4. PHÁT NHẠC & ĐỒNG BỘ LỜI BÀI HÁT
+        // =========================================
         const audio = document.getElementById('my-audio');
         const playBtn = document.getElementById('play-btn');
         const progress = document.getElementById('progress');
@@ -146,12 +218,20 @@
         const totalTimeEl = document.getElementById('total-time');
         const lyricsEl = document.getElementById('lyrics-text'); 
         const progressContainer = document.getElementById('progress-container');
+        const volDownBtn = document.getElementById('vol-down-btn');
+        const volUpBtn = document.getElementById('vol-up-btn');
         
+        const playlist = [
+            { title: "Đánh Đổi", artist: "Obito, Shiki", src: "danhdoi.mp3", cover: "obito.jpg" },
+            { title: "Không Yêu Em Thì Yêu Ai", artist: "Vũ., Low G", src: "khongyeuemthiyeuai.mp3", cover: "vu.jpg" },
+            { title: "Bài hát 3", artist: "Ca sĩ 3", src: "nhac3.mp3", cover: "anh3.jpg" }
+        ];
+        
+        let currentTrackIndex = 0;
         let isPlaying = false;
         let currentLyricIndex = -1;
+        let loadedTrackIndex = -1;
 
-        // KHO LỜI BÀI HÁT
-        // KHO LỜI BÀI HÁT ĐÃ CANH CHUẨN THỜI GIAN THEO FILE AUDIO
         const lyricsData = [
             { time: 0, text: "If I had ten thousand tongues I couldn't tell all that the Lord has done for me" },
             { time: 8, text: "So I'll keep on singing, praise" },
@@ -221,11 +301,100 @@
             { time: 228, text: "..." }
         ];
 
+        const lyricsData_VnLowG = [
+            { time: 0, text: "Có ánh mắt, câu thơ dịu dàng" },
+            { time: 4, text: "Cất tiếng nói ngân nga vội vàng ấy" },
+            { time: 9, text: "Có nhớ lắm ai ơi chiều tàn" },
+            { time: 14, text: "Bước xuống phố thênh thang, nhẹ nhàng trôi" },
+            { time: 18, text: "Đôi tay mang giấc mơ đượm buồn đó" },
+            { time: 23, text: "Trong con tim lúc đau liệu còn có em?" },
+            { time: 29, text: "Liệu còn có em?" },
+            { time: 37, text: "Anh viết nên câu ca buồn rồi rẽ ngang qua mây" },
+            { time: 42, text: "Lạc bước trong ánh nắng cuối thu" },
+            { time: 47, text: "Không có em" },
+            { time: 49, text: "Phía chân trời không có em" },
+            { time: 51, text: "Bởi vì" },
+            { time: 54, text: "Không yêu em thì yêu ai? (Không yêu em thì yêu ai?)" },
+            { time: 60, text: "Anh bất chấp hết đến ngày mai (bất chấp hết đến ngày mai)" },
+            { time: 65, text: "Không yêu em thì yêu ai? (Không yêu em thì yêu ai?)" },
+            { time: 70, text: "Và với nước mắt lạnh đôi vai (hoh-oh-oh-oh-oh-oh)" },
+            { time: 75, text: "Không yêu em thì yêu ai? (Không yêu em thì yêu ai?)" },
+            { time: 80, text: "Anh bất chấp hết đến ngày mai (bất chấp hết đến ngày mai)" },
+            { time: 85, text: "Không yêu em thì yêu ai? (Không yêu em thì yêu ai?)" },
+            { time: 90, text: "Và với nước mắt lạnh đôi vai (với nước mắt lạnh đôi vai)" },
+            { time: 100, text: "Không tìm được ai ngọt ngào hơn và hợp hơn" },
+            { time: 104, text: "Xinh hơn và duyên hơn ngoài em (yeah)" },
+            { time: 106, text: "Anh thấy mặt trời và cầu vồng và kì lân trong đầu ngay từ khi hai ta làm quen" },
+            { time: 110, text: "Không còn mưa rào và mây đen (right)" },
+            { time: 112, text: "Không còn những buổi sáng nhàm chán (ah)" },
+            { time: 114, text: "Fantasy về buổi hẹn hò, anh bắt đầu thấy nhớ" },
+            { time: 116, text: "Bắt đầu muốn lấy cớ để gặp em rồi giả vờ đi lang thang" },
+            { time: 119, text: "Anh thấy mình ra rạp phim cùng nhau và mua vài xô bỏng ngô để ngồi và ăn đến tối" },
+            { time: 124, text: "Xong mình mua vé vào show, nghe nhạc Vũ chờ thời điểm để đặt môi lên môi" },
+            { time: 129, text: "Đèn sân khấu sẽ rọi xuống, đủ loại màu lấp lánh trên mắt em khi em nhìn anh bối rối" },
+            { time: 134, text: "Ngước lên trời, thấy pháo hoa, và sao chổi, em bật khóc và em nói chỉ cần mình anh thôi" },
+            { time: 139, text: "Baby girl" },
+            { time: 140, text: "I just wanna be a part of your world" },
+            { time: 142, text: "Let everything around us swirl" },
+            { time: 144, text: "Đột nhiên khung cảnh chuyển khác" },
+            { time: 146, text: "Em bảo anh cần phải thôi chờ em vì không còn cách nào khác ngoài việc là hai ta phải dừng" },
+            { time: 151, text: "Anh bảo đừng, em bảo quá muộn" },
+            { time: 153, text: "Anh bảo, \"Em điên à, em biết mà, anh không thể buông\"" },
+            { time: 156, text: "Sao mà anh buông được" },
+            { time: 158, text: "Từ khi ngày em đến thì chứng rối loạn lo âu nó đã không còn quẩn quanh" },
+            { time: 162, text: "Anh đã vứt hết đống Xanax và cuộc hẹn với bác sĩ chỉ vì em mới là trị liệu của anh" },
+            { time: 167, text: "Đừng đi, mình sẽ chống lại thế giới, mình sẽ sống cuộc sống mới" },
+            { time: 171, text: "Nếu em muốn, mình sẽ tới một thành phố yên bình hơn" },
+            { time: 174, text: "Xong hai ta hôn thật lâu, nước mắt em lăn trên má" },
+            { time: 177, text: "Giật mình tỉnh khỏi cơn mơ, anh nhận ra (bởi vì)" },
+            { time: 181, text: "Không yêu em thì yêu ai? (Không yêu em thì yêu ai?)" },
+            { time: 186, text: "Anh bất chấp hết đến ngày mai (bất chấp hết đến ngày mai)" },
+            { time: 191, text: "Không yêu em thì yêu ai? (Không yêu em thì yêu ai?)" },
+            { time: 196, text: "Và với nước mắt lạnh đôi vai (hoh-oh-oh-oh-oh-oh)" },
+            { time: 202, text: "Không yêu em thì yêu ai? (Ai? Ai? Ai? Ai?)" },
+            { time: 207, text: "Anh bất chấp hết đến ngày mai (bất chấp hết đến ngày mai, yeah)" },
+            { time: 212, text: "Không yêu em thì yêu ai? (Không yêu em thì yêu ai?)" },
+            { time: 217, text: "Với nước mắt lạnh đôi vai" },
+            { time: 221, text: "Yeah, anh biết là chuyện có thể sai (đúng)" },
+            { time: 224, text: "Nhưng anh vẫn sẽ đứng ở đây chờ đợi em kể cả khi mà em đang có bạn trai" },
+            { time: 228, text: "Không em thì ai? (Không ai!)" },
+            { time: 230, text: "Không yêu em thì yêu ai? (Không ai! Không yêu em thì yêu ai?)" },
+            { time: 233, text: "Không yêu em thì yêu ai? (Không ai! Không yêu em thì yêu ai?)" },
+            { time: 236, text: "Let me hear you say, one, two, three, let's go" },
+            { time: 239, text: "Không yêu em thì yêu ai? (Yeah, không yêu em thì yêu ai?)" },
+            { time: 244, text: "Anh bất chấp hết đến ngày mai (yeah, bất chấp hết đến ngày mai)" },
+            { time: 249, text: "Không yêu em thì yêu ai? (Ai? Ai? Ai? Ai? Yeah)" },
+            { time: 254, text: "Và với nước mắt lạnh đôi vai (hoh-oh-oh-oh-oh-oh)" },
+            { time: 260, text: "Không yêu em thì yêu ai? (Không biết yêu em thì anh biết yêu ai?)" },
+            { time: 265, text: "Anh bất chấp hết đến ngày mai (yeah, bất chấp hết đến ngày mai, let's go)" },
+            { time: 270, text: "Không yêu em thì yêu ai? (Ai? Không yêu em thì yêu ai?)" },
+            { time: 275, text: "Với nước mắt lạnh đôi vai (không một ai)" }
+        ];
+
         function playTrack() {
+            if (loadedTrackIndex !== currentTrackIndex) {
+                audio.src = playlist[currentTrackIndex].src;
+                document.getElementById('track-title').innerText = playlist[currentTrackIndex].title + " - " + playlist[currentTrackIndex].artist;
+                document.getElementById('track-cover').src = playlist[currentTrackIndex].cover;
+                currentLyricIndex = -1;
+                lyricsEl.innerText = "Đang tải lời bài hát...";
+                lyricsEl.classList.remove('active');
+                loadedTrackIndex = currentTrackIndex;
+            }
             audio.play();
             isPlaying = true;
             playBtn.innerHTML = '⏸';
         }
+
+        document.getElementById('next-btn').addEventListener('click', () => {
+            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+            playTrack();
+        });
+
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+            playTrack();
+        });
 
         function pauseTrack() {
             audio.pause();
@@ -236,62 +405,61 @@
         playBtn.addEventListener('click', () => {
             isPlaying ? pauseTrack() : playTrack();
         });
+        
+        volDownBtn.addEventListener('click', () => {
+            if(audio.volume > 0.1) audio.volume -= 0.1;
+            else audio.volume = 0;
+        });
 
-        // Lấy thời lượng tổng của bài hát
+        volUpBtn.addEventListener('click', () => {
+            if(audio.volume < 0.9) audio.volume += 0.1;
+            else audio.volume = 1;
+        });
+
         audio.addEventListener('loadedmetadata', () => {
             let min = Math.floor(audio.duration / 60);
             let sec = Math.floor(audio.duration % 60);
             totalTimeEl.innerText = `${min}:${sec < 10 ? '0' : ''}${sec}`;
         });
 
-        // HỆ THỐNG ĐỒNG BỘ LYRICS & THANH CHẠY
-       // ĐỒNG BỘ LYRICS & THANH CHẠY (ĐÃ THÊM TÍNH NĂNG CHỈNH ĐỘ TRỄ)
         audio.addEventListener('timeupdate', () => {
-            let actualTime = audio.currentTime;
-            
-            // 1. Cập nhật thanh thời gian (Vẫn chạy đúng theo nhạc)
-            const percent = (actualTime / audio.duration) * 100;
+            const percent = (audio.currentTime / audio.duration) * 100;
             if(!isNaN(percent)) progress.style.width = `${percent}%`;
             
-            let min = Math.floor(actualTime / 60);
-            let sec = Math.floor(actualTime % 60);
+            let min = Math.floor(audio.currentTime / 60);
+            let sec = Math.floor(audio.currentTime % 60);
             currentTimeEl.innerText = `${min}:${sec < 10 ? '0' : ''}${sec}`;
 
-            // --- BÍ QUYẾT Ở ĐÂY ---
-            // Nếu chữ ra QUÁ NHANH, cậu tăng số này lên (ví dụ: 1.5, 2, 3...)
-            // Nếu chữ ra QUÁ CHẬM, cậu đổi thành số âm (ví dụ: -1, -2...)
-            let delaySeconds = 0; // Đang lùi lời bài hát lại 1.5 giây
+            let currentLyrics = [];
+            if (currentTrackIndex === 0) currentLyrics = lyricsData;
+            else if (currentTrackIndex === 1) currentLyrics = lyricsData_VnLowG;
             
-            // Thời gian ảo dùng để tính toán chữ (đã bị lùi lại)
-            let lyricsTime = actualTime - delaySeconds; 
-
-            // 2. Logic tìm câu hát
-            let nextIndex = lyricsData.findIndex(lyric => lyric.time > lyricsTime);
-            let activeIndex = nextIndex === -1 ? lyricsData.length - 1 : nextIndex - 1;
+            if (currentLyrics.length === 0) {
+                lyricsEl.innerText = "Enjoy the music~";
+                return;
+            }
+            
+            let timeToCompare = audio.currentTime; 
+            let nextIndex = currentLyrics.findIndex(lyric => lyric.time > timeToCompare);
+            let activeIndex = nextIndex === -1 ? currentLyrics.length - 1 : nextIndex - 1;
 
             if (activeIndex !== currentLyricIndex && activeIndex >= 0) {
                 currentLyricIndex = activeIndex;
-                
                 lyricsEl.classList.remove('active');
+                
                 setTimeout(() => {
-                    lyricsEl.innerText = lyricsData[currentLyricIndex].text;
+                    lyricsEl.innerText = currentLyrics[currentLyricIndex].text;
                     lyricsEl.classList.add('active');
-                }, 300);
+                }, 150); 
             }
         });
-        // BẮT SỰ KIỆN CLICK ĐỂ TUA NHẠC
+
         progressContainer.addEventListener('click', (e) => {
             const width = progressContainer.clientWidth;
             const clickX = e.offsetX;
             const duration = audio.duration;
-            
-            // Cập nhật thời gian bài hát
             audio.currentTime = (clickX / width) * duration;
-            
-            // Nếu nhạc đang dừng mà bấm tua thì cho phát luôn
-            if (!isPlaying) {
-                playTrack();
-            }
+            if (!isPlaying) playTrack();
         });
     </script>
 </body>
