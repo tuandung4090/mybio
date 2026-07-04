@@ -6,7 +6,7 @@
 
 body {
     background-color: #1a1a2e;
-    background-image: url('lt.jpg'); /* Nhớ để ảnh anime vào thư mục nha */
+    background-image: url('op.jpg'); /* Nhớ để ảnh anime vào thư mục nha */
     background-size: cover; background-position: center; background-attachment: fixed;
     min-height: 100vh; display: flex; justify-content: center; align-items: center;
     color: white; overflow: hidden;
@@ -18,21 +18,23 @@ body, a, button, .progress-bar-mini, .action-btn, .sq-btn, .donate-btn {
 }
 
 /* =========================================
-   HIỆU ỨNG CON TRỎ CHUỘT CHẤM ĐEN (ĐÃ LÀM NHỎ & ĐEN HƠN)
+   HIỆU ỨNG CON TRỎ CHUỘT (VIỀN TRẮNG ĐẬM & PHÁT SÁNG)
    ========================================= */
 #custom-cursor {
     position: fixed;
     top: 0; 
     left: 0;
-    width: 14px; /* Thu nhỏ lại */
-    height: 14px; /* Thu nhỏ lại */
-    background-color: #000000; /* Màu đen tuyệt đối */
-    border: 1px solid rgba(255, 255, 255, 0.25); /* Viền mỏng lại để màu đen nổi bật hơn */
+    width: 14px; 
+    height: 14px; 
+    background-color: #000000; 
+    border: 2px solid #ffffff; /* SỬA Ở ĐÂY: Viền trắng đặc và đậm hơn (2px) */
     border-radius: 50%;
-    pointer-events: none; /* Quan trọng để click xuyên qua được */
+    pointer-events: none; 
     z-index: 999999; 
     transform: translate(-50%, -50%); 
     transition: transform 0.1s ease; 
+    /* SỬA Ở ĐÂY: Hào quang sáng mờ ảo tỏa rộng xung quanh */
+    box-shadow: 0 0 15px 3px rgba(255, 255, 255, 0.8); 
 }
 
 /* =========================================
@@ -160,7 +162,6 @@ body, a, button, .progress-bar-mini, .action-btn, .sq-btn, .donate-btn {
     pointer-events: none;
 }
 
-
 /* =========================================
    MAIN CONTENT (GIAO DIỆN BIO NẰM NGANG)
    ========================================= */
@@ -184,16 +185,15 @@ body, a, button, .progress-bar-mini, .action-btn, .sq-btn, .donate-btn {
     border-radius: 20px; 
     padding: 28px; 
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-    position: relative; /* Cần thiết để z-index hoạt động */
+    position: relative; 
     z-index: 10;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Làm mượt chuyển động nổi lên */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
 }
 
-/* KHI LIA CHUỘT VÀO THẺ: NỔI LÊN VÀ ĐÈ LÊN THẺ KHÁC */
 .glass-card:hover {
     transform: translateY(-8px) scale(1.03); 
-    z-index: 100; /* Đẩy thẻ này lên lớp cao nhất */
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7); /* Tăng độ đậm của bóng đổ */
+    z-index: 100; 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7); 
     border: 1px solid rgba(255, 255, 255, 0.3); 
 }
 
@@ -269,9 +269,10 @@ body, a, button, .progress-bar-mini, .action-btn, .sq-btn, .donate-btn {
     width: 10px; height: 10px; background: white; border-radius: 50%;
 }
 
-.controls-right { display: flex; gap: 15px; align-items: center; }
-.control-btn { background: none; border: none; color: white; font-size: 1.2rem; }
-.play-btn { font-size: 1.8rem; }
+.controls-right { display: flex; gap: 10px; align-items: center; } 
+.control-btn { background: none; border: none; color: white; font-size: 1.1rem; cursor: pointer; transition: color 0.2s; }
+.control-btn:hover { color: #5865f2; } 
+.play-btn { font-size: 1.6rem; }
 
 .cover-art { 
     width: 85px;  
@@ -301,4 +302,9 @@ body, a, button, .progress-bar-mini, .action-btn, .sq-btn, .donate-btn {
     opacity: 1;
     transform: translateY(0);
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 600px) {
+    .music-layout { flex-direction: column; text-align: center; }
+    .controls-right { margin-top: 10px; justify-content: center; }
 }
