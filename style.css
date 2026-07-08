@@ -6,14 +6,14 @@
 
 body {
     background-color: #1a1a2e;
-    background-image: url('op.jpg'); /* Nhớ để ảnh anime vào thư mục nha */
+    background-image: url('cat1.jpg'); /* Nhớ để ảnh anime vào thư mục nha */
     background-size: cover; background-position: center; background-attachment: fixed;
     min-height: 100vh; display: flex; justify-content: center; align-items: center;
     color: white; overflow: hidden;
 }
 
 /* Ẩn con trỏ chuột mặc định để dùng chuột custom */
-body, a, button, .progress-bar-mini, .action-btn, .sq-btn, .donate-btn {
+body, a, button, .action-btn, .sq-btn {
     cursor: none !important;
 }
 
@@ -27,13 +27,12 @@ body, a, button, .progress-bar-mini, .action-btn, .sq-btn, .donate-btn {
     width: 14px; 
     height: 14px; 
     background-color: #000000; 
-    border: 2px solid #ffffff; /* SỬA Ở ĐÂY: Viền trắng đặc và đậm hơn (2px) */
+    border: 2px solid #ffffff; 
     border-radius: 50%;
     pointer-events: none; 
     z-index: 999999; 
     transform: translate(-50%, -50%); 
     transition: transform 0.1s ease; 
-    /* SỬA Ở ĐÂY: Hào quang sáng mờ ảo tỏa rộng xung quanh */
     box-shadow: 0 0 15px 3px rgba(255, 255, 255, 0.8); 
 }
 
@@ -220,7 +219,7 @@ body, a, button, .progress-bar-mini, .action-btn, .sq-btn, .donate-btn {
 .desc { font-size: 0.85rem; color: #ccc; margin-bottom: 15px; line-height: 1.4; }
 .desc b { color: #fff; }
 
-.social-actions { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.social-actions { display: flex; justify-content: flex-start; align-items: center; gap: 10px; }
 .social-icons { display: flex; gap: 8px; }
 .sq-btn {
     width: 35px; height: 35px; background: rgba(255,255,255,0.15); color: white;
@@ -228,12 +227,6 @@ body, a, button, .progress-bar-mini, .action-btn, .sq-btn, .donate-btn {
     border-radius: 8px; text-decoration: none; transition: 0.2s;
 }
 .sq-btn:hover { background: rgba(255,255,255,0.3); }
-
-.donate-btn {
-    position: relative; background: #ff6b9e; color: white; padding: 8px 16px;
-    border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 0.9rem;
-}
-.rem-sticker { position: absolute; top: -35px; right: -10px; width: 45px; pointer-events: none; }
 
 /* --- CARD 2: DISCORD ROW --- */
 .discord-row { display: flex; gap: 15px; }
@@ -253,58 +246,9 @@ body, a, button, .progress-bar-mini, .action-btn, .sq-btn, .donate-btn {
 .stat-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 .stat-dot.green { background: #43b581; } .stat-dot.grey { background: #747f8d; }
 
-.action-btn { background: #3ba55c; color: white; border: none; padding: 8px; border-radius: 8px; transition: 0.2s; font-weight: bold; width: 100%; }
+.action-btn { background: #3ba55c; color: white; border: none; padding: 8px; border-radius: 8px; transition: 0.2s; font-weight: bold; width: 100%; text-decoration: none; text-align: center; display: block; }
 .action-btn:hover { background: #2d8046; }
 
-/* --- CARD 3: MUSIC --- */
-.music-layout { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-.music-details { flex: 1; }
-.music-details h3 { font-size: 1rem; margin-bottom: 8px; }
-
-.time-info { display: flex; align-items: center; gap: 10px; font-size: 0.75rem; color: #ccc; }
-.progress-bar-mini { flex: 1; height: 4px; background: rgba(255,255,255,0.2); border-radius: 5px; position: relative; }
-.progress-mini { width: 10%; height: 100%; background: white; border-radius: 5px; position: relative; }
-.progress-mini::after {
-    content: ''; position: absolute; right: -5px; top: -3px;
-    width: 10px; height: 10px; background: white; border-radius: 50%;
-}
-
-.controls-right { display: flex; gap: 10px; align-items: center; } 
-.control-btn { background: none; border: none; color: white; font-size: 1.1rem; cursor: pointer; transition: color 0.2s; }
-.control-btn:hover { color: #5865f2; } 
-.play-btn { font-size: 1.6rem; }
-
-.cover-art { 
-    width: 85px;  
-    height: 85px; 
-    border-radius: 12px; 
-    object-fit: cover; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
-    flex-shrink: 0; 
-}
-
-/* Lời bài hát */
-.lyrics-text { 
-    text-align: center; 
-    font-size: 0.95rem; 
-    color: #fff; 
-    font-weight: bold;
-    min-height: 45px; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    opacity: 0; 
-    transform: translateY(10px);
-}
-
-.lyrics-text.active {
-    opacity: 1;
-    transform: translateY(0);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
-
 @media (max-width: 600px) {
-    .music-layout { flex-direction: column; text-align: center; }
-    .controls-right { margin-top: 10px; justify-content: center; }
+    .discord-row { flex-direction: column; }
 }
